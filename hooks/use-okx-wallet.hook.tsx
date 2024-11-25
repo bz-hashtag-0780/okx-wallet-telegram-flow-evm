@@ -22,8 +22,8 @@ export default function useOKXWallet() {
 		const initProvider = async () => {
 			const okxProvider = await OKXUniversalProvider.init({
 				dappMetaData: {
-					name: 'Your App Name',
-					icon: '/path-to-your-icon.png', // 180x180 PNG URL
+					name: 'Flow DApp',
+					icon: 'https://cryptologos.cc/logos/flow-flow-logo.png',
 				},
 			});
 			setProvider(okxProvider);
