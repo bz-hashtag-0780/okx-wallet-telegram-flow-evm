@@ -8,8 +8,8 @@ interface AuthContextType {
 	connected: any;
 	walletAddress: any;
 	chainId: any;
-	connectWallet: any;
-	disconnectWallet: any;
+	logIn: any;
+	logOut: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -46,7 +46,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 		initClient();
 	}, []);
 
-	const connectWallet = async () => {
+	const logIn = async () => {
 		if (!client) return;
 		try {
 			const session = await client.openModal({
@@ -69,7 +69,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 		}
 	};
 
-	const disconnectWallet = async () => {
+	const logOut = async () => {
 		if (!client) return;
 		try {
 			await client.disconnect();
@@ -87,8 +87,8 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 				connected,
 				walletAddress,
 				chainId,
-				connectWallet,
-				disconnectWallet,
+				logIn,
+				logOut,
 			}}
 		>
 			{children}
