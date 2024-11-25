@@ -3,18 +3,6 @@
 import { useEffect, useState } from 'react';
 import { OKXUniversalConnectUI, THEME } from '@okxconnect/ui';
 
-const flowChainConfig = {
-	chainId: '747',
-	chainName: 'Flow',
-	nativeCurrency: {
-		name: 'Flow',
-		symbol: 'FLOW',
-		decimals: 18,
-	},
-	rpcUrls: ['https://mainnet.evm.nodes.onflow.org'],
-	blockExplorerUrls: ['https://evm.flowscan.io/'],
-};
-
 export default function useOKXUI() {
 	const [client, setClient] = useState<OKXUniversalConnectUI | null>(null);
 
@@ -43,20 +31,6 @@ export default function useOKXUI() {
 		initClient();
 	}, []);
 
-	const addFlowChain = async () => {
-		if (!client) return;
-		try {
-			await client.request({
-				method: 'wallet_addEthereumChain',
-				params: [flowChainConfig],
-			});
-			console.log('Flow EVM chain added.');
-		} catch (error) {
-			console.error('Failed to add Flow EVM chain:', error);
-			throw error;
-		}
-	};
-
 	const connectWallet = async () => {
 		if (!client) throw new Error('Client not initialized');
 		try {
@@ -68,12 +42,6 @@ export default function useOKXUI() {
 					},
 				},
 			});
-
-			// Ensure Flow EVM chain is added
-			const chains = session?.namespaces?.eip155?.chains || [];
-			if (!chains.includes('eip155:747')) {
-				await addFlowChain();
-			}
 
 			const address =
 				session?.namespaces?.eip155?.accounts[0]?.split(':')[2];
@@ -94,5 +62,5 @@ export default function useOKXUI() {
 		}
 	};
 
-	return { connectWallet, disconnectWallet, addFlowChain };
+	return { connectWallet, disconnectWallet };
 }
