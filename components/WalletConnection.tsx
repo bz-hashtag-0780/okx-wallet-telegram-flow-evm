@@ -8,7 +8,7 @@ export default function WalletConnection() {
 	return (
 		<div className="page-container">
 			<div className="card">
-				<h1 className="card-title">Flow EVM Wallet Connection</h1>
+				<h1 className="card-title">OKX Wallet Connect</h1>
 				<p className="card-subtitle">
 					Connect your wallet to interact with Flow EVM
 				</p>
