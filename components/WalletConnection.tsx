@@ -10,7 +10,7 @@ export default function WalletConnection() {
 			<div className="card">
 				<h1 className="card-title">OKX Wallet Connect</h1>
 
-				{connected ? (
+				{connected && walletAddress ? (
 					<div>
 						<p className="card-subtitle">
 							Thanks for connecting your wallet!
