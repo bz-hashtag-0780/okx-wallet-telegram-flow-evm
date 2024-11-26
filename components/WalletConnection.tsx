@@ -9,36 +9,48 @@ export default function WalletConnection() {
 		<div className="page-container">
 			<div className="card">
 				<h1 className="card-title">OKX Wallet Connect</h1>
-				<p className="card-subtitle">Connect your wallet with OKX</p>
 
 				{connected ? (
-					<div className="space-y-4">
-						<p className="connected-text">
-							Wallet Address:{' '}
-							<span className="connected-username">
-								{walletAddress.slice(0, 6)}...
-								{walletAddress.slice(-6)}
-							</span>
+					<div>
+						<p className="card-subtitle">
+							Thanks for connecting your wallet!
 						</p>
-						{chainId && (
+						<div className="space-y-4">
 							<p className="connected-text">
-								Chain ID:{' '}
+								Wallet Address:{' '}
 								<span className="connected-username">
-									{chainId}
+									{walletAddress.slice(0, 6)}...
+									{walletAddress.slice(-6)}
 								</span>
 							</p>
-						)}
-						<button
-							onClick={logOut}
-							className="button button-disconnect"
-						>
-							Disconnect Wallet
-						</button>
+							{chainId && (
+								<p className="connected-text">
+									Chain ID:{' '}
+									<span className="connected-username">
+										{chainId}
+									</span>
+								</p>
+							)}
+							<button
+								onClick={logOut}
+								className="button button-disconnect"
+							>
+								Disconnect Wallet
+							</button>
+						</div>
 					</div>
 				) : (
-					<button onClick={logIn} className="button button-connect">
-						Connect OKX Wallet
-					</button>
+					<div>
+						<p className="card-subtitle">
+							Connect your wallet with OKX
+						</p>
+						<button
+							onClick={logIn}
+							className="button button-connect"
+						>
+							Connect OKX Wallet
+						</button>
+					</div>
 				)}
 			</div>
 		</div>
