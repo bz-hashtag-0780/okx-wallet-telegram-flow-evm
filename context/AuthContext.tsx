@@ -65,7 +65,11 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
 			const address =
 				session.namespaces.eip155.accounts[0]?.split(':')[2];
-			const chain = session.namespaces.eip155.chains[0];
+
+			// Remove the "eip155:" prefix from the chainId
+			const rawChainId = session.namespaces.eip155.chains[0];
+			const chain = rawChainId?.split(':')[1] || null;
+
 			setWalletAddress(address);
 			setChainId(chain);
 			setConnected(true);
