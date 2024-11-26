@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { OKXUniversalConnectUI, THEME } from '@okxconnect/ui';
 
 interface AuthContextType {
-	connected: any;
-	walletAddress: any;
-	chainId: any;
-	logIn: any;
-	logOut: any;
+	connected: boolean;
+	walletAddress: string | null;
+	chainId: string | null;
+	logIn: () => Promise<void>;
+	logOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,7 +16,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
-	const [client, setClient] = useState<any>(null);
+	const [client, setClient] = useState<OKXUniversalConnectUI | null>(null);
 	const [walletAddress, setWalletAddress] = useState<string | null>(null);
 	const [chainId, setChainId] = useState<string | null>(null);
 	const [connected, setConnected] = useState(false);
@@ -57,6 +56,12 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 					},
 				},
 			});
+
+			// Ensure session is defined
+			if (!session || !session.namespaces.eip155) {
+				console.error('Session is undefined or invalid');
+				return;
+			}
 
 			const address =
 				session.namespaces.eip155.accounts[0]?.split(':')[2];
