@@ -20,8 +20,7 @@ export default function WalletConnection() {
 								Wallet Address:{' '}
 								{walletAddress && (
 									<span className="connected-username">
-										{walletAddress.slice(0, 6)}...
-										{walletAddress.slice(-6)}
+										{walletAddress}
 									</span>
 								)}
 							</p>
