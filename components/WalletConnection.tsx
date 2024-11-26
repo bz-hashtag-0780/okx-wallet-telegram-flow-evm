@@ -10,7 +10,7 @@ export default function WalletConnection() {
 			<div className="card">
 				<h1 className="card-title">OKX Wallet Connect</h1>
 
-				{connected && walletAddress ? (
+				{connected ? (
 					<div>
 						<p className="card-subtitle">
 							Thanks for connecting your wallet!
@@ -18,10 +18,12 @@ export default function WalletConnection() {
 						<div className="space-y-4">
 							<p className="connected-text">
 								Wallet Address:{' '}
-								<span className="connected-username">
-									{walletAddress.slice(0, 6)}...
-									{walletAddress.slice(-6)}
-								</span>
+								{walletAddress && (
+									<span className="connected-username">
+										{walletAddress.slice(0, 6)}...
+										{walletAddress.slice(-6)}
+									</span>
+								)}
 							</p>
 							{chainId && (
 								<p className="connected-text">
